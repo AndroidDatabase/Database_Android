@@ -5,6 +5,10 @@ var express = require('express');
 var http = require('http').createServer(app);
 var port = process.env.PORT || 3000;
 
+//importing script
+const retrieve = require('./controller/feeds_myday')
+
+
 var connection = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
@@ -12,6 +16,8 @@ var connection = mysql.createPool({
     password: '',
     database: 'database_android'
 });
+
+
 
 app.post('/accounts/create', function (req, res) {
     console.log(req.headers.username);
@@ -28,6 +34,11 @@ app.post('/accounts/create', function (req, res) {
         res.send(results[1]);
         return;
     });
+})
+
+
+app.post('/feeds/mydays', (req,res) => {
+    
 })
 
 migration.init(connection, __dirname + '/migrations');
